@@ -413,10 +413,9 @@ class EasyRichText extends StatelessWidget {
             ),
           );
         } else {
-          print("TEXT: $str");
           inlineSpan = TextSpan(
             text: str,
-            recognizer: pattern.recognizer,
+            recognizer: TapGestureRecognizer()..onTap = () { print(str)},
             style: pattern.style == null
                 ? DefaultTextStyle.of(context).style
                 : pattern.style,
