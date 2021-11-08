@@ -188,15 +188,15 @@ class EasyRichText extends StatelessWidget {
       /// if target string is Han or Arabic character
       /// set matchWordBoundaries = false
       /// set wordBoundaryStringBeforeTarget = ""
-      if (isHan || isArabic) {
-        matchWordBoundaries = false;
-        leftBoundary = "";
-        rightBoundary = "";
-        wordBoundaryStringBeforeTarget1 = "";
-        wordBoundaryStringBeforeTarget2 = "";
-        wordBoundaryStringAfterTarget1 = "";
-        wordBoundaryStringAfterTarget2 = "";
-      }
+      // if (isHan || isArabic) {
+      //   matchWordBoundaries = false;
+      //   leftBoundary = "";
+      //   rightBoundary = "";
+      //   wordBoundaryStringBeforeTarget1 = "";
+      //   wordBoundaryStringBeforeTarget2 = "";
+      //   wordBoundaryStringAfterTarget1 = "";
+      //   wordBoundaryStringAfterTarget2 = "";
+      // }
 
       String stringBeforeTargetRegex = "";
       if (stringBeforeTarget != "") {
