@@ -416,7 +416,7 @@ class EasyRichText extends StatelessWidget {
           print("TEXT: $str");
           inlineSpan = TextSpan(
             text: str,
-            recognizer: recognizer ?? pattern.recognizer,
+            recognizer: pattern.recognizer,
             style: pattern.style == null
                 ? DefaultTextStyle.of(context).style
                 : pattern.style,
