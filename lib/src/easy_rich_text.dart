@@ -415,7 +415,7 @@ class EasyRichText extends StatelessWidget {
         } else {
           inlineSpan = TextSpan(
             text: str,
-            recognizer: TapGestureRecognizer()..onTap = () { print(str)},
+            recognizer: TapGestureRecognizer()..onTap = () { print(str);},
             style: pattern.style == null
                 ? DefaultTextStyle.of(context).style
                 : pattern.style,
