@@ -361,12 +361,12 @@ class ArabicRichText extends StatelessWidget {
       }
       var inlineSpan;
       if (tempArabicText != "") {
+        final text = tempArabicText;
         inlineSpan = TextSpan(
-          text: tempArabicText,
+          text: text,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              final text = tempArabicText;
-              print(text);
+               print(text);
             },
           style: arabicStyle,
         );
@@ -518,4 +518,8 @@ class ArabicRichText extends StatelessWidget {
     }
     return inlineSpan;
   }
+}
+
+extension on TextSpan {
+
 }
