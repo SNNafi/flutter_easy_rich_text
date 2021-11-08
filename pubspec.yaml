@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   url_launcher: ^6.0.2
+  flutter_tts: ^3.2.2
   
 dev_dependencies:
   flutter_test:
