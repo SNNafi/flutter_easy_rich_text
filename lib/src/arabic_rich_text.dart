@@ -85,21 +85,21 @@ class ArabicRichText extends StatelessWidget {
 
   ArabicRichText(this.text,
       {Key? key,
-      this.patternList,
-      this.defaultStyle,
-      this.arabicStyle,
-      this.textAlign = TextAlign.start,
-      this.textDirection,
-      this.softWrap = true,
-      this.overflow = TextOverflow.clip,
-      this.textScaleFactor = 1.0,
-      this.maxLines,
-      this.locale,
-      this.strutStyle,
-      this.textWidthBasis = TextWidthBasis.parent,
-      this.caseSensitive = true,
-      this.selectable = false,
-      this.recognizer});
+        this.patternList,
+        this.defaultStyle,
+        this.arabicStyle,
+        this.textAlign = TextAlign.start,
+        this.textDirection,
+        this.softWrap = true,
+        this.overflow = TextOverflow.clip,
+        this.textScaleFactor = 1.0,
+        this.maxLines,
+        this.locale,
+        this.strutStyle,
+        this.textWidthBasis = TextWidthBasis.parent,
+        this.caseSensitive = true,
+        this.selectable = false,
+        this.recognizer});
 
   _launchURL(String str) async {
     String url = str;
@@ -112,8 +112,8 @@ class ArabicRichText extends StatelessWidget {
     return '\\~[]{}#%^*+=_|<>£€•.,!’()?-\$'.split('');
   }
 
-  TapGestureRecognizer? tapGestureRecognizerForUrls(
-      String str, String urlType) {
+  TapGestureRecognizer? tapGestureRecognizerForUrls(String str,
+      String urlType) {
     TapGestureRecognizer? tapGestureRecognizer;
     switch (urlType) {
       case 'web':
@@ -142,8 +142,8 @@ class ArabicRichText extends StatelessWidget {
     return tapGestureRecognizer;
   }
 
-  List<String> processStrList(
-      List<EasyRichTextPattern> patternList, String temText) {
+  List<String> processStrList(List<EasyRichTextPattern> patternList,
+      String temText) {
     List<String> strList = [];
     List<List<int>> positions = [];
 
@@ -182,11 +182,11 @@ class ArabicRichText extends StatelessWidget {
       }
 
       bool isHan = RegExp(r"[\u4e00-\u9fa5]+",
-              caseSensitive: caseSensitive, unicode: unicode)
+          caseSensitive: caseSensitive, unicode: unicode)
           .hasMatch(targetString);
 
       bool isArabic = RegExp(r"[\u0621-\u064A]+",
-              caseSensitive: caseSensitive, unicode: unicode)
+          caseSensitive: caseSensitive, unicode: unicode)
           .hasMatch(targetString);
 
       /// if target string is Han or Arabic character
@@ -205,17 +205,17 @@ class ArabicRichText extends StatelessWidget {
       String stringBeforeTargetRegex = "";
       if (stringBeforeTarget != "") {
         stringBeforeTargetRegex =
-            "(?<=$wordBoundaryStringBeforeTarget1$stringBeforeTarget$wordBoundaryStringBeforeTarget2)";
+        "(?<=$wordBoundaryStringBeforeTarget1$stringBeforeTarget$wordBoundaryStringBeforeTarget2)";
       }
       String stringAfterTargetRegex = "";
       if (stringAfterTarget != "") {
         stringAfterTargetRegex =
-            "(?=$wordBoundaryStringAfterTarget1$stringAfterTarget$wordBoundaryStringAfterTarget2)";
+        "(?=$wordBoundaryStringAfterTarget1$stringAfterTarget$wordBoundaryStringAfterTarget2)";
       }
 
       //modify targetString by matchWordBoundaries and wordBoundaryStringBeforeTarget settings
       thisRegExPattern =
-          '($stringBeforeTargetRegex$leftBoundary$targetString$rightBoundary$stringAfterTargetRegex)';
+      '($stringBeforeTargetRegex$leftBoundary$targetString$rightBoundary$stringAfterTargetRegex)';
       RegExp exp = new RegExp(thisRegExPattern,
           caseSensitive: caseSensitive, unicode: unicode);
       var allMatches = exp.allMatches(temText);
@@ -241,11 +241,11 @@ class ArabicRichText extends StatelessWidget {
         }
       } else if (matchOption is List<dynamic>) {
         matchOption.forEach(
-          (option) {
+              (option) {
             switch (option) {
               case 'all':
                 matchIndexList =
-                    new List<int>.generate(matchesLength, (i) => i);
+                new List<int>.generate(matchesLength, (i) => i);
                 break;
               case 'first':
                 matchIndexList.add(0);
@@ -337,7 +337,7 @@ class ArabicRichText extends StatelessWidget {
         if (pattern.hasSpecialCharacters) {
           unicode = false;
           String newTargetString =
-              replaceSpecialCharacters(pattern.targetString);
+          replaceSpecialCharacters(pattern.targetString);
           finalTempPatternList2
               .add(pattern.copyWith(targetString: newTargetString));
         } else {
@@ -371,20 +371,23 @@ class ArabicRichText extends StatelessWidget {
         );
         tempArabicText = "";
         textSpanList.add(inlineSpan);
-        otherStyle(context, str, tempPatternList, finalTempPatternList2,
-            unicode, inlineSpan);
+        textSpanList.add(
+            otherStyle(context, str, tempPatternList, finalTempPatternList2,
+                unicode));
       } else {
-        otherStyle(context, str, tempPatternList, finalTempPatternList2,
-            unicode, inlineSpan);
+        textSpanList.add(
+            otherStyle(context, str, tempPatternList, finalTempPatternList2,
+                unicode));
       }
-      textSpanList.add(inlineSpan);
     }
 
     if (selectable) {
       return SelectableText.rich(
         TextSpan(
             style: defaultStyle == null
-                ? DefaultTextStyle.of(context).style
+                ? DefaultTextStyle
+                .of(context)
+                .style
                 : defaultStyle,
             children: textSpanList),
         maxLines: maxLines,
@@ -398,7 +401,9 @@ class ArabicRichText extends StatelessWidget {
       return RichText(
         text: TextSpan(
             style: defaultStyle == null
-                ? DefaultTextStyle.of(context).style
+                ? DefaultTextStyle
+                .of(context)
+                .style
                 : defaultStyle,
             children: textSpanList),
         locale: locale,
@@ -414,13 +419,12 @@ class ArabicRichText extends StatelessWidget {
     }
   }
 
-  void otherStyle(
-      BuildContext context,
+  dynamic otherStyle(BuildContext context,
       String str,
       List<EasyRichTextPattern>? tempPatternList,
       List<EasyRichTextPattern> finalTempPatternList2,
-      bool unicode,
-      dynamic inlineSpan) {
+      bool unicode) {
+    var inlineSpan;
     int targetIndex = -1;
     RegExpMatch? match;
     if (tempPatternList != null) {
@@ -455,7 +459,9 @@ class ArabicRichText extends StatelessWidget {
           text: str,
           recognizer: tapGestureRecognizerForUrls(str, urlType),
           style: pattern.style == null
-              ? DefaultTextStyle.of(context).style
+              ? DefaultTextStyle
+              .of(context)
+              .style
               : pattern.style,
         );
       } else if (pattern.superScript && !selectable) {
@@ -467,7 +473,9 @@ class ArabicRichText extends StatelessWidget {
               str,
               textScaleFactor: 0.7,
               style: pattern.style == null
-                  ? DefaultTextStyle.of(context).style
+                  ? DefaultTextStyle
+                  .of(context)
+                  .style
                   : pattern.style,
             ),
           ),
@@ -481,7 +489,9 @@ class ArabicRichText extends StatelessWidget {
               str,
               textScaleFactor: 0.7,
               style: pattern.style == null
-                  ? DefaultTextStyle.of(context).style
+                  ? DefaultTextStyle
+                  .of(context)
+                  .style
                   : pattern.style,
             ),
           ),
@@ -494,7 +504,9 @@ class ArabicRichText extends StatelessWidget {
               print(str);
             },
           style: pattern.style == null
-              ? DefaultTextStyle.of(context).style
+              ? DefaultTextStyle
+              .of(context)
+              .style
               : pattern.style,
         );
       }
@@ -503,5 +515,6 @@ class ArabicRichText extends StatelessWidget {
         text: str,
       );
     }
+    return inlineSpan;
   }
 }
