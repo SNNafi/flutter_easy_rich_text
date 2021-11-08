@@ -77,23 +77,25 @@ class EasyRichText extends StatelessWidget {
   ///selectable text, default false
   final bool selectable;
 
-  EasyRichText(
-    this.text, {
-    Key? key,
-    this.patternList,
-    this.defaultStyle,
-    this.textAlign = TextAlign.start,
-    this.textDirection,
-    this.softWrap = true,
-    this.overflow = TextOverflow.clip,
-    this.textScaleFactor = 1.0,
-    this.maxLines,
-    this.locale,
-    this.strutStyle,
-    this.textWidthBasis = TextWidthBasis.parent,
-    this.caseSensitive = true,
-    this.selectable = false,
-  });
+  ///GestureRecognizer
+  final GestureRecognizer? recognizer;
+
+  EasyRichText(this.text,
+      {Key? key,
+      this.patternList,
+      this.defaultStyle,
+      this.textAlign = TextAlign.start,
+      this.textDirection,
+      this.softWrap = true,
+      this.overflow = TextOverflow.clip,
+      this.textScaleFactor = 1.0,
+      this.maxLines,
+      this.locale,
+      this.strutStyle,
+      this.textWidthBasis = TextWidthBasis.parent,
+      this.caseSensitive = true,
+      this.selectable = false,
+      this.recognizer});
 
   _launchURL(String str) async {
     String url = str;
@@ -411,9 +413,10 @@ class EasyRichText extends StatelessWidget {
             ),
           );
         } else {
+          print("TEXT: $str");
           inlineSpan = TextSpan(
             text: str,
-            recognizer: pattern.recognizer,
+            recognizer: recognizer ?? pattern.recognizer,
             style: pattern.style == null
                 ? DefaultTextStyle.of(context).style
                 : pattern.style,
