@@ -365,7 +365,8 @@ class ArabicRichText extends StatelessWidget {
           text: tempArabicText,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              print(tempArabicText.length);
+              final text = tempArabicText;
+              print(text);
             },
           style: arabicStyle,
         );
